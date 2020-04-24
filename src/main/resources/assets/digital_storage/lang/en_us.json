@@ -1,0 +1,24 @@
+{
+    "itemGroup.digital_storage.items": "Digital Storage",
+    "itemGroup.digital_storage.storage": "Digital Storage Drives",
+    "block.digital_storage.cable": "Cable",
+    "block.digital_storage.drive_bay": "Drive Bay",
+    "block.digital_storage.tape_drive": "Tape Drive",
+    "block.digital_storage.access_terminal": "Access Terminal",
+    "block.digital_storage.external_storage_attachment": "External Storage Attachment",
+    "screen.digital_storage.access_terminal": "Access Terminal",
+
+    "format.digital_storage.one": "%s",
+    "format.digital_storage.thousand": "%sk",
+    "format.digital_storage.ten_thousand": "%sk",
+    "format.digital_storage.million": "%sM",
+    "format.digital_storage.ten_million": "%sM",
+    "format.digital_storage.billion": "%sB",
+    "format.digital_storage.ten_billion": "%sB",
+    "format.digital_storage.trillion": "%sT",
+    "format.digital_storage.ten_trillion": "%sT",
+    "format.digital_storage.quadrillion": "%sq",
+    "format.digital_storage.ten_quadrillion": "%sq",
+    "format.digital_storage.quintillion": "%sQ",
+    "format.digital_storage.max": "MAX"
+}

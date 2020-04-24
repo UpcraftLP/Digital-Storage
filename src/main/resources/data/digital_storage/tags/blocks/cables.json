@@ -1,0 +1,9 @@
+{
+    "replace": false,
+    "values": [
+        "digital_storage:access_terminal",
+        "digital_storage:external_storage_attachment",
+        "digital_storage:drive_bay",
+        "digital_storage:tape_drive"
+    ]
+}

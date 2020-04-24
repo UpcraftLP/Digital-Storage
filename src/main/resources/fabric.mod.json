@@ -1,0 +1,44 @@
+{
+    "schemaVersion": 1,
+    "id": "digital_storage",
+    "name": "Digital Storage",
+    "version": "$version",
+    "environment": "*",
+    "icon": "assets/digital_storage/icon.png",
+    "depends": {
+    },
+    "custom": {
+        "mesh:registry": [
+
+        ]
+    },
+    "entrypoints": {
+        "main": [
+            "com.github.upcraftlp.digitalstorage.DigitalStorage"
+        ],
+        "client": [
+            "com.github.upcraftlp.digitalstorage.client.DigitalStorageClient"
+        ],
+        "mesh:registry": [
+            "com.github.upcraftlp.digitalstorage.init.DSRegistries",
+            "com.github.upcraftlp.digitalstorage.init.DSBlockEntityTypes",
+            "com.github.upcraftlp.digitalstorage.init.DSBlocks",
+            "com.github.upcraftlp.digitalstorage.init.DSDeviceTraits",
+            "com.github.upcraftlp.digitalstorage.init.DSDeviceTypes",
+            "com.github.upcraftlp.digitalstorage.init.DSItems"
+        ]
+    },
+    "authors": [
+        {
+            "name": "UpcraftLP",
+            "contact": {
+                "homepage": "https://twitter.com/UpcraftLP",
+                "twitter": "https://twitter.com/UpcraftLP"
+            }
+        }
+    ],
+    "description": "operating at 5.32 TFLOPS",
+    "mixins": [
+        "mixins.digitalstorage.json"
+    ]
+}
