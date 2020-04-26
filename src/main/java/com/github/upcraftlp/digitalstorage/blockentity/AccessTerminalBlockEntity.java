@@ -1,9 +1,9 @@
 package com.github.upcraftlp.digitalstorage.blockentity;
 
-import com.github.upcraftlp.digitalstorage.api.DigitalComponents;
-import com.github.upcraftlp.digitalstorage.api.network.NetworkPoint;
+import com.github.upcraftlp.digitalstorage.api.component.DigitalNetworkPoint;
 import com.github.upcraftlp.digitalstorage.blockentity.container.AccessTerminalContainer;
 import com.github.upcraftlp.digitalstorage.init.DSBlockEntityTypes;
+import com.github.upcraftlp.digitalstorage.util.DSComponents;
 import com.github.upcraftlp.digitalstorage.util.DSMenus;
 import com.github.upcraftlp.digitalstorage.util.ItemStackWrapper;
 import nerdhub.cardinal.components.api.component.BlockComponentProvider;
@@ -45,9 +45,9 @@ public class AccessTerminalBlockEntity extends DigitalBlockEntity<AccessTerminal
             //    list.add(new ItemStackWrapper(new ItemStack(item), RANDOM.nextInt(60000) + 1));
             //}
             //return list;
-            if(this.hasLink()) {
-                Optional<NetworkPoint> ap = BlockComponentProvider.get(world.getBlockState(this.getLink())).optionally(world, this.getLink(), DigitalComponents.NETWORK_ACCESSIBLE, null);
-                ret = ap.map(NetworkPoint::getContentsTemp).orElse(Collections.emptyList());
+            if(this.link.hasConnection()) {
+                Optional<DigitalNetworkPoint> ap = BlockComponentProvider.get(world.getBlockState(this.link.getConnection())).optionally(world, this.link.getConnection(), DSComponents.NETWORK_COMPONENT, null);
+                ret = ap.map(DigitalNetworkPoint::getContentsTemp).orElse(Collections.emptyList());
             }
             return ret;
         }, world.getServer()).thenAcceptAsync(items -> {

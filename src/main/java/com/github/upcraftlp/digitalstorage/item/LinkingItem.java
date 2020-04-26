@@ -1,11 +1,13 @@
 package com.github.upcraftlp.digitalstorage.item;
 
 import com.github.upcraftlp.digitalstorage.DigitalStorage;
-import com.github.upcraftlp.digitalstorage.blockentity.DigitalBlockEntity;
+import com.github.upcraftlp.digitalstorage.api.component.LinkHolder;
+import com.github.upcraftlp.digitalstorage.util.DSComponents;
+import nerdhub.cardinal.components.api.component.BlockComponentProvider;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.util.NbtType;
-import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.BlockState;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
@@ -15,6 +17,7 @@ import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
@@ -30,34 +33,41 @@ public class LinkingItem extends DSItem {
 
     @Override
     public ActionResult useOnBlock(ItemUsageContext context) {
-        BlockEntity be = context.getWorld().getBlockEntity(context.getBlockPos());
-        if(be instanceof DigitalBlockEntity) {
-            if(!context.getWorld().isClient()) {
-                ItemStack stack = context.getStack();
-                CompoundTag tag = stack.getOrCreateSubTag(DigitalStorage.MODID);
-                if(tag.contains(KEY_LINK_POS, NbtType.COMPOUND)) {
-                    BlockPos link = NbtHelper.toBlockPos(tag.getCompound(KEY_LINK_POS));
-                    DigitalBlockEntity<?> blockEntity = (DigitalBlockEntity<?>) be;
-                    BlockEntity original = context.getWorld().getBlockEntity(link);
-                    if(original instanceof DigitalBlockEntity) {
-                        blockEntity.setLink(link);
-                        ((DigitalBlockEntity<?>) original).setLink(blockEntity.getPos());
-                        tag.remove(KEY_LINK_POS);
-                    }
-                    else {
-                        if(context.getPlayer() != null) {
-                            context.getPlayer().sendMessage(new LiteralText("invalid connection!"));
+        if(!context.getWorld().isClient) {
+            World world = context.getWorld();
+            BlockPos pos = context.getBlockPos();
+            BlockState state = world.getBlockState(pos);
+            BlockComponentProvider.get(state).optionally(world, pos, DSComponents.NETWORK_COMPONENT, context.getSide())
+                    .ifPresent(networkPoint -> {
+                        ItemStack stack = context.getStack();
+                        CompoundTag tag = stack.getOrCreateSubTag(DigitalStorage.MODID);
+                        if(tag.contains(KEY_LINK_POS, NbtType.COMPOUND) && tag.contains("Side", NbtType.STRING)) {
+                            BlockPos link = NbtHelper.toBlockPos(tag.getCompound(KEY_LINK_POS));
+                            Direction targetSide = Direction.byName(tag.getString("Side"));
+                            BlockState targetState = world.getBlockState(link);
+                            BlockComponentProvider.get(targetState).optionally(world, link, DSComponents.NETWORK_COMPONENT, targetSide)
+                                    .ifPresent(linkTarget -> {
+                                        //TODO get rid of casts
+                                        if(linkTarget instanceof LinkHolder) {
+                                            ((LinkHolder) linkTarget).setConnection(pos);
+                                        }
+                                        if(networkPoint instanceof LinkHolder) {
+                                            ((LinkHolder) networkPoint).setConnection(link);
+                                        }
+                                        tag.remove(KEY_LINK_POS);
+                                        tag.remove("Side");
+                                        if(context.getPlayer() != null) {
+                                            context.getPlayer().sendMessage(new LiteralText("Connected!"));
+                                        }
+                                    });
                         }
-                    }
-                }
-                else {
-                    tag.put(KEY_LINK_POS, NbtHelper.fromBlockPos(be.getPos()));
-                    ((DigitalBlockEntity<?>) be).clearLink();
-                }
-            }
-            return ActionResult.SUCCESS;
+                        else {
+                            tag.put(KEY_LINK_POS, NbtHelper.fromBlockPos(pos));
+                            tag.putString("Side", context.getSide().getName());
+                        }
+                    });
         }
-        return super.useOnBlock(context);
+        return ActionResult.SUCCESS;
     }
 
     @Environment(EnvType.CLIENT)

@@ -1,11 +1,12 @@
 package com.github.upcraftlp.digitalstorage.block;
 
-import com.github.upcraftlp.digitalstorage.api.DigitalComponents;
-import com.github.upcraftlp.digitalstorage.api.network.NetworkPoint;
+import com.github.upcraftlp.digitalstorage.api.component.DigitalNetworkPoint;
+import com.github.upcraftlp.digitalstorage.util.DSComponents;
 import com.github.upcraftlp.digitalstorage.util.ItemStackWrapper;
 import nerdhub.cardinal.components.api.ComponentType;
 import nerdhub.cardinal.components.api.component.BlockComponentProvider;
 import nerdhub.cardinal.components.api.component.Component;
+import net.fabricmc.fabric.api.network.PacketContext;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.HopperBlockEntity;
@@ -13,9 +14,12 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.Properties;
+import net.minecraft.util.PacketByteBuf;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.BlockView;
@@ -27,7 +31,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
-import java.util.UUID;
 
 public class ExternalStorageBlock extends DigitalBlock implements BlockComponentProvider {
 
@@ -57,14 +60,40 @@ public class ExternalStorageBlock extends DigitalBlock implements BlockComponent
 
     @Override
     public <T extends Component> boolean hasComponent(BlockView blockView, BlockPos blockPos, ComponentType<T> componentType, @Nullable Direction direction) {
-        return componentType == DigitalComponents.NETWORK_ACCESSIBLE && direction != blockView.getBlockState(blockPos).get(FACING);
+        return componentType == DSComponents.NETWORK_COMPONENT && direction != blockView.getBlockState(blockPos).get(FACING);
     }
 
     @SuppressWarnings("all")
     @Nullable
     @Override
     public <T extends Component> T getComponent(BlockView blockView, BlockPos blockPos, ComponentType<T> componentType, @Nullable Direction direction) {
-        return hasComponent(blockView, blockPos, componentType, direction) ? (T) new NetworkPoint() {
+        return hasComponent(blockView, blockPos, componentType, direction) ? (T) new DigitalNetworkPoint() {
+            @Override
+            public void fromTag(CompoundTag tag) {
+            }
+
+            @Override
+            public CompoundTag toTag(CompoundTag tag) {
+                return null;
+            }
+
+            @Override
+            public void sync() {
+            }
+
+            @Override
+            public void syncWith(ServerPlayerEntity player) {
+            }
+
+            @Override
+            public void processPacket(PacketContext ctx, PacketByteBuf buf) {
+            }
+
+            @Override
+            public Set<BlockPos> getConnections() {
+                return Collections.emptySet();
+            }
+
             @Override
             public Collection<ItemStackWrapper> getContentsTemp() {
                 BlockState thisState = blockView.getBlockState(blockPos);
@@ -82,20 +111,6 @@ public class ExternalStorageBlock extends DigitalBlock implements BlockComponent
                 return Collections.emptyList();
             }
 
-            @Override
-            public UUID getDeviceID() {
-                return null;
-            }
-
-            @Override
-            public UUID getNetworkID() {
-                return null;
-            }
-
-            @Override
-            public Collection<NetworkPoint> getConnections() {
-                return null;
-            }
         } : null;
     }
 

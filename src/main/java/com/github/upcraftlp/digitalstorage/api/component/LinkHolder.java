@@ -1,16 +1,22 @@
 package com.github.upcraftlp.digitalstorage.api.component;
 
+import com.github.upcraftlp.digitalstorage.blockentity.DigitalBlockEntity;
+import com.github.upcraftlp.digitalstorage.util.ItemStackWrapper;
 import nerdhub.cardinal.components.api.util.sync.BaseSyncedComponent;
+import net.fabricmc.fabric.api.block.entity.BlockEntityClientSerializable;
 import net.fabricmc.fabric.api.network.PacketContext;
 import net.fabricmc.fabric.api.server.PlayerStream;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtHelper;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.PacketByteBuf;
 import net.minecraft.util.math.BlockPos;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Objects;
 
 public class LinkHolder implements DigitalNetworkPointSingle, BaseSyncedComponent {
@@ -29,14 +35,29 @@ public class LinkHolder implements DigitalNetworkPointSingle, BaseSyncedComponen
     }
 
     @Override
+    public Collection<ItemStackWrapper> getContentsTemp() {
+        return this.anchor instanceof DigitalBlockEntity ? ((DigitalBlockEntity<?>) this.anchor).getContentsTemp() : Collections.emptySet();
+    }
+
+    @Override
     public BlockPos getConnection() {
         return Objects.requireNonNull(connection, "getConnection() called without hasConnection()!");
+    }
+
+    public void setConnection(@Nullable BlockPos connection) {
+        this.connection = connection;
+        this.sync();
     }
 
     @Override
     public void sync() {
         this.anchor.markDirty();
-        PlayerStream.watching(this.anchor).map(ServerPlayerEntity.class::cast).forEach(this::syncWith);
+        if(this.anchor instanceof BlockEntityClientSerializable) {
+            ((BlockEntityClientSerializable) this.anchor).sync();
+        }
+        else {
+            PlayerStream.watching(this.anchor).map(ServerPlayerEntity.class::cast).forEach(this::syncWith);
+        }
     }
 
     @Override
@@ -54,12 +75,18 @@ public class LinkHolder implements DigitalNetworkPointSingle, BaseSyncedComponen
 
     @Override
     public void fromTag(CompoundTag compoundTag) {
-
+        this.connection = compoundTag.getBoolean("Linked") ? NbtHelper.toBlockPos(compoundTag.getCompound("Pos")) : null;
     }
 
     @Override
     public CompoundTag toTag(CompoundTag compoundTag) {
-
+        compoundTag.putBoolean("Linked", this.hasConnection());
+        if(this.hasConnection()) {
+            compoundTag.put("Pos", NbtHelper.fromBlockPos(this.getConnection()));
+        }
+        else {
+            compoundTag.remove("Pos");
+        }
         return compoundTag;
     }
 }
