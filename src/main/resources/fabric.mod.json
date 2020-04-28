@@ -40,5 +40,6 @@
     "description": "operating at 5.32 TFLOPS",
     "mixins": [
         "mixins.digitalstorage.json"
-    ]
+    ],
+    "accessWidener": "META-INF/digital_storage.aww"
 }

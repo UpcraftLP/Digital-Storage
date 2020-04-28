@@ -1,4 +1,4 @@
-package com.github.upcraftlp.digitalstorage.util;
+package com.github.upcraftlp.digitalstorage.menu;
 
 import com.github.upcraftlp.digitalstorage.DigitalStorage;
 import net.minecraft.client.resource.language.I18n;

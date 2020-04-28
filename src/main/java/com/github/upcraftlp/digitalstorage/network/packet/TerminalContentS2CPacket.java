@@ -1,8 +1,8 @@
 package com.github.upcraftlp.digitalstorage.network.packet;
 
-import com.github.upcraftlp.digitalstorage.blockentity.container.AccessTerminalContainer;
+import com.github.upcraftlp.digitalstorage.menu.container.AccessTerminalContainer;
 import com.github.upcraftlp.digitalstorage.util.ItemStackWrapper;
-import com.github.upcraftlp.digitalstorage.util.network.NetworkHooks;
+import com.github.upcraftlp.digitalstorage.network.DSNetworkHooks;
 import io.netty.buffer.Unpooled;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -21,7 +21,7 @@ import java.util.List;
 
 public class TerminalContentS2CPacket {
 
-    public static final Identifier ID = NetworkHooks.getPacketID("terminal_content", NetworkSide.CLIENTBOUND);
+    static final Identifier ID = DSNetworkHooks.getPacketID("terminal_content", NetworkSide.CLIENTBOUND);
 
     public static void send(PlayerEntity player, int syncId, boolean reset, Collection<ItemStackWrapper> items) {
         PacketByteBuf byteBuf = new PacketByteBuf(Unpooled.buffer());
@@ -34,7 +34,7 @@ public class TerminalContentS2CPacket {
 
     @Environment(EnvType.CLIENT)
     @SuppressWarnings("ConstantConditions")
-    public static void onPacket(PacketContext ctx, PacketByteBuf byteBuf) {
+    static void onPacket(PacketContext ctx, PacketByteBuf byteBuf) {
         int syncID = byteBuf.readVarInt();
         boolean reset = byteBuf.readBoolean();
         int size = byteBuf.readVarInt();
@@ -45,7 +45,7 @@ public class TerminalContentS2CPacket {
         }
         ctx.getTaskQueue().execute(() -> {
             Container clientContainer = MinecraftClient.getInstance().player.container;
-            if(syncID == clientContainer.syncId || syncID == NetworkHooks.FORCE_SYNC) {
+            if(syncID == clientContainer.syncId || syncID == DSNetworkHooks.FORCE_SYNC) {
                 ((AccessTerminalContainer) clientContainer).addItems(items, false, reset);
             }
         });

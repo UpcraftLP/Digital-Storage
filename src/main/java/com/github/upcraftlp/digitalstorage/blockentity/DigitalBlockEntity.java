@@ -1,9 +1,9 @@
 package com.github.upcraftlp.digitalstorage.blockentity;
 
 import com.github.upcraftlp.digitalstorage.api.component.LinkHolder;
-import com.github.upcraftlp.digitalstorage.blockentity.container.DSContainer;
+import com.github.upcraftlp.digitalstorage.menu.container.DSContainer;
 import com.github.upcraftlp.digitalstorage.util.DSComponents;
-import com.github.upcraftlp.digitalstorage.util.DigitalContainerProvider;
+import com.github.upcraftlp.digitalstorage.menu.DigitalContainerProvider;
 import com.github.upcraftlp.digitalstorage.util.ItemStackWrapper;
 import nerdhub.cardinal.components.api.ComponentType;
 import nerdhub.cardinal.components.api.component.BlockComponentProvider;

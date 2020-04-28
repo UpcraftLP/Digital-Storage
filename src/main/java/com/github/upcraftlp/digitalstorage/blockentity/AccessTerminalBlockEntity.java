@@ -1,10 +1,10 @@
 package com.github.upcraftlp.digitalstorage.blockentity;
 
 import com.github.upcraftlp.digitalstorage.api.component.DigitalNetworkPoint;
-import com.github.upcraftlp.digitalstorage.blockentity.container.AccessTerminalContainer;
+import com.github.upcraftlp.digitalstorage.menu.container.AccessTerminalContainer;
 import com.github.upcraftlp.digitalstorage.init.DSBlockEntityTypes;
 import com.github.upcraftlp.digitalstorage.util.DSComponents;
-import com.github.upcraftlp.digitalstorage.util.DSMenus;
+import com.github.upcraftlp.digitalstorage.menu.DSMenus;
 import com.github.upcraftlp.digitalstorage.util.ItemStackWrapper;
 import nerdhub.cardinal.components.api.component.BlockComponentProvider;
 import net.minecraft.entity.player.PlayerEntity;

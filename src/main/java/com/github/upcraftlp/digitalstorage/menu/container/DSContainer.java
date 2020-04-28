@@ -1,4 +1,4 @@
-package com.github.upcraftlp.digitalstorage.blockentity.container;
+package com.github.upcraftlp.digitalstorage.menu.container;
 
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.container.Container;

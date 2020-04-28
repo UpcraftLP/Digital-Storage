@@ -1,6 +1,6 @@
-package com.github.upcraftlp.digitalstorage.util;
+package com.github.upcraftlp.digitalstorage.menu;
 
-import com.github.upcraftlp.digitalstorage.blockentity.container.DSContainer;
+import com.github.upcraftlp.digitalstorage.menu.container.DSContainer;
 import net.fabricmc.fabric.api.container.ContainerProviderRegistry;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;

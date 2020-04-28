@@ -1,8 +1,8 @@
-package com.github.upcraftlp.digitalstorage.client.screen;
+package com.github.upcraftlp.digitalstorage.menu.screen;
 
 import com.github.upcraftlp.digitalstorage.DigitalStorage;
-import com.github.upcraftlp.digitalstorage.blockentity.container.AccessTerminalContainer;
-import com.github.upcraftlp.digitalstorage.util.DsFormatter;
+import com.github.upcraftlp.digitalstorage.menu.container.AccessTerminalContainer;
+import com.github.upcraftlp.digitalstorage.menu.DsFormatter;
 import com.github.upcraftlp.digitalstorage.util.ItemStackWrapper;
 import com.mojang.blaze3d.systems.RenderSystem;
 import me.shedaniel.clothconfig2.api.ScissorsHandler;
@@ -48,12 +48,7 @@ public class AccessTerminalScreen extends ContainerScreen<AccessTerminalContaine
                 posY = move + itemsY + row * 18;
                 this.drawStackWithCount(stack, posX, posY);
                 if(this.isPointWithinBounds(posX, posY, 16, 16, mouseX + this.x, mouseY + this.y)) {
-                    //TODO are those GL flags needed?
-                    //RenderSystem.disableDepthTest();
-                    //RenderSystem.colorMask(true, true, true, false);
                     fill(posX, posY, posX + 16, posY + 16, 0x80FFFFFF);
-                    //RenderSystem.colorMask(true, true, true, true);
-                    //RenderSystem.enableDepthTest();
                 }
             }
         }

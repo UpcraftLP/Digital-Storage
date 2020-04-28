@@ -1,7 +1,7 @@
 package com.github.upcraftlp.digitalstorage.network.packet;
 
 import com.github.upcraftlp.digitalstorage.DigitalStorage;
-import com.github.upcraftlp.digitalstorage.util.network.NetworkHooks;
+import com.github.upcraftlp.digitalstorage.network.DSNetworkHooks;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.network.PacketContext;
@@ -12,7 +12,7 @@ import net.minecraft.util.PacketByteBuf;
 
 public class NetworkPointSyncS2CPacket {
 
-    public static final Identifier ID = NetworkHooks.getPacketID("network_ap", NetworkSide.CLIENTBOUND);
+    static final Identifier ID = DSNetworkHooks.getPacketID("network_ap", NetworkSide.CLIENTBOUND);
 
     public static void send(PlayerEntity target, PacketByteBuf data) {
         DigitalStorage.getLogger().error("not implemented!", new RuntimeException("stacktrace"));
@@ -20,7 +20,7 @@ public class NetworkPointSyncS2CPacket {
     }
 
     @Environment(EnvType.CLIENT)
-    public static void onPacket(PacketContext ctx, PacketByteBuf byteBuf) {
+    static void onPacket(PacketContext ctx, PacketByteBuf byteBuf) {
 
     }
 }

@@ -21,6 +21,7 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.IWorld;
 import org.jetbrains.annotations.Nullable;
 
+// keeping this for reference, even tho it's not being used right now
 public class CableBlock extends ConnectingBlock implements RenderLayerProvider, ItemBlockProvider {
 
     public CableBlock(Settings settings) {

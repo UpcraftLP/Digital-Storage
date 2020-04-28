@@ -2,9 +2,14 @@ package com.github.upcraftlp.digitalstorage;
 
 import com.github.glasspane.mesh.api.annotation.CalledByReflection;
 import com.github.glasspane.mesh.api.logging.MeshLoggerFactory;
+import com.github.upcraftlp.digitalstorage.network.packet.ChunkInfoS2CPacket;
+import com.github.upcraftlp.digitalstorage.network.packet.ClearDataS2CPacket;
 import com.github.upcraftlp.digitalstorage.util.DSComponents;
-import com.github.upcraftlp.digitalstorage.util.DSMenus;
+import com.github.upcraftlp.digitalstorage.menu.DSMenus;
 import com.github.upcraftlp.digitalstorage.util.DSTags;
+import com.github.upcraftlp.digitalstorage.util.command.DSCommands;
+import nerdhub.cardinal.components.api.event.ChunkSyncCallback;
+import nerdhub.cardinal.components.api.event.PlayerSyncCallback;
 import org.apache.logging.log4j.Logger;
 
 import net.minecraft.item.ItemGroup;
@@ -18,20 +23,23 @@ import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 @CalledByReflection
 public class DigitalStorage implements ModInitializer {
 
-        public static final String MODID = "digital_storage";
+    public static final String MODID = "digital_storage";
 
-        public static final ItemGroup DS_ITEMS = FabricItemGroupBuilder.build(new Identifier(MODID, "items"), () -> new ItemStack(Items.CHEST));
-        public static final ItemGroup DS_DRIVES = FabricItemGroupBuilder.build(new Identifier(MODID, "storage"), () -> new ItemStack(Items.MUSIC_DISC_WAIT));
-        private static final Logger logger = MeshLoggerFactory.createPrefixLogger(MODID, "Digital Storage");
+    public static final ItemGroup DS_ITEMS = FabricItemGroupBuilder.build(new Identifier(MODID, "items"), () -> new ItemStack(Items.CHEST));
+    public static final ItemGroup DS_DRIVES = FabricItemGroupBuilder.build(new Identifier(MODID, "storage"), () -> new ItemStack(Items.MUSIC_DISC_WAIT));
+    private static final Logger logger = MeshLoggerFactory.createPrefixLogger(MODID, "Digital Storage");
 
-        public static Logger getLogger() {
-                return logger;
-        }
+    public static Logger getLogger() {
+        return logger;
+    }
 
-        @Override
-        public void onInitialize() {
-                DSMenus.registerContainers();
-                DSTags.init();
-                DSComponents.init();
-        }
+    @Override
+    public void onInitialize() {
+        DSMenus.registerContainers();
+        DSTags.init();
+        DSComponents.init();
+        DSCommands.init();
+        PlayerSyncCallback.EVENT.register(ClearDataS2CPacket::clearClientData);
+        ChunkSyncCallback.EVENT.register((player, chunk) -> ChunkInfoS2CPacket.sendChunkData(player, player.getServerWorld(), chunk));
+    }
 }

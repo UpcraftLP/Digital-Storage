@@ -1,7 +1,6 @@
 package com.github.upcraftlp.digitalstorage.block;
 
 import com.github.glasspane.mesh.api.registry.ItemBlockProvider;
-import com.github.upcraftlp.digitalstorage.DigitalStorage;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
@@ -9,6 +8,8 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 
 import javax.annotation.Nullable;
+
+import static com.github.upcraftlp.digitalstorage.util.DSUtils.*;
 
 public class DigitalBlock extends Block implements ItemBlockProvider {
 
@@ -19,7 +20,7 @@ public class DigitalBlock extends Block implements ItemBlockProvider {
     @Nullable
     @Override
     public Item createItem() {
-        return new BlockItem(this, new Item.Settings().group(DigitalStorage.DS_ITEMS));
+        return makeItem(settings -> new BlockItem(this, settings));
     }
 
     @Deprecated

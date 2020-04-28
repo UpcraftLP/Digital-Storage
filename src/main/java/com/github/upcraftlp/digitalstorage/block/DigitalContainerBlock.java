@@ -1,7 +1,7 @@
 package com.github.upcraftlp.digitalstorage.block;
 
-import com.github.upcraftlp.digitalstorage.blockentity.container.DSContainer;
-import com.github.upcraftlp.digitalstorage.util.DigitalContainerProvider;
+import com.github.upcraftlp.digitalstorage.menu.container.DSContainer;
+import com.github.upcraftlp.digitalstorage.menu.DigitalContainerProvider;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockEntityProvider;
 import net.minecraft.block.BlockState;

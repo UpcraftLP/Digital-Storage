@@ -1,10 +1,10 @@
-package com.github.upcraftlp.digitalstorage.util;
+package com.github.upcraftlp.digitalstorage.menu;
 
 import com.github.upcraftlp.digitalstorage.DigitalStorage;
-import com.github.upcraftlp.digitalstorage.blockentity.container.AccessTerminalContainer;
-import com.github.upcraftlp.digitalstorage.blockentity.container.DriveBayContainer;
-import com.github.upcraftlp.digitalstorage.client.screen.AccessTerminalScreen;
-import com.github.upcraftlp.digitalstorage.client.screen.DriveBayScreen;
+import com.github.upcraftlp.digitalstorage.menu.container.AccessTerminalContainer;
+import com.github.upcraftlp.digitalstorage.menu.container.DriveBayContainer;
+import com.github.upcraftlp.digitalstorage.menu.screen.AccessTerminalScreen;
+import com.github.upcraftlp.digitalstorage.menu.screen.DriveBayScreen;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.screen.ScreenProviderRegistry;

@@ -16,6 +16,6 @@ public class DSTags {
     public static final Tag<Item> ITEM_CRYSTAL_DRIVES = TagRegistry.item(new Identifier(DigitalStorage.MODID, "storage/crystal_drives"));
 
     public static void init() {
-        DigitalStorage.getLogger().debug("registering tags..");
+        DigitalStorage.getLogger().trace("registering tags");
     }
 }

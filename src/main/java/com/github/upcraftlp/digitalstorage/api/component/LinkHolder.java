@@ -6,6 +6,7 @@ import nerdhub.cardinal.components.api.util.sync.BaseSyncedComponent;
 import net.fabricmc.fabric.api.block.entity.BlockEntityClientSerializable;
 import net.fabricmc.fabric.api.network.PacketContext;
 import net.fabricmc.fabric.api.server.PlayerStream;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtHelper;
@@ -13,6 +14,7 @@ import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.PacketByteBuf;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
@@ -40,11 +42,26 @@ public class LinkHolder implements DigitalNetworkPointSingle, BaseSyncedComponen
     }
 
     @Override
+    public BlockPos getPosition() {
+        return this.anchor.getPos();
+    }
+
+    @Override
+    public World getWorld() {
+        return this.anchor.getWorld();
+    }
+
+    @Override
     public BlockPos getConnection() {
         return Objects.requireNonNull(connection, "getConnection() called without hasConnection()!");
     }
 
     public void setConnection(@Nullable BlockPos connection) {
+        if(this.hasConnection()) { //clean up the old connection first
+            BlockState state = this.getWorld().getBlockState(this.getConnection());
+            //FIXME fix
+            //BlockComponentProvider.get(state).optionally(this.getWorld(), this.getConnection(), DSComponents.NETWORK_COMPONENT, null).ifPresent(target -> target.removeConnection(this.getPosition()));
+        }
         this.connection = connection;
         this.sync();
     }

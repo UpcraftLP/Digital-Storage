@@ -1,8 +1,8 @@
 package com.github.upcraftlp.digitalstorage.blockentity;
 
-import com.github.upcraftlp.digitalstorage.blockentity.container.DriveBayContainer;
+import com.github.upcraftlp.digitalstorage.menu.container.DriveBayContainer;
 import com.github.upcraftlp.digitalstorage.init.DSBlockEntityTypes;
-import com.github.upcraftlp.digitalstorage.util.DSMenus;
+import com.github.upcraftlp.digitalstorage.menu.DSMenus;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.BasicInventory;
 import net.minecraft.inventory.Inventory;

@@ -70,11 +70,12 @@ public class ExternalStorageBlock extends DigitalBlock implements BlockComponent
         return hasComponent(blockView, blockPos, componentType, direction) ? (T) new DigitalNetworkPoint() {
             @Override
             public void fromTag(CompoundTag tag) {
+
             }
 
             @Override
             public CompoundTag toTag(CompoundTag tag) {
-                return null;
+                return tag;
             }
 
             @Override
@@ -109,6 +110,16 @@ public class ExternalStorageBlock extends DigitalBlock implements BlockComponent
                     }
                 }
                 return Collections.emptyList();
+            }
+
+            @Override
+            public BlockPos getPosition() {
+                return blockPos;
+            }
+
+            @Override
+            public World getWorld() {
+                return blockView instanceof World ? (World) blockView : null;
             }
 
         } : null;

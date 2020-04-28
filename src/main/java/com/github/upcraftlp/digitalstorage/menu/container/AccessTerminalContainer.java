@@ -1,4 +1,4 @@
-package com.github.upcraftlp.digitalstorage.blockentity.container;
+package com.github.upcraftlp.digitalstorage.menu.container;
 
 import com.github.upcraftlp.digitalstorage.blockentity.AccessTerminalBlockEntity;
 import com.github.upcraftlp.digitalstorage.network.packet.TerminalContentS2CPacket;

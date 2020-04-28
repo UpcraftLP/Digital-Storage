@@ -1,7 +1,7 @@
-package com.github.upcraftlp.digitalstorage.client.screen;
+package com.github.upcraftlp.digitalstorage.menu.screen;
 
 import com.github.upcraftlp.digitalstorage.DigitalStorage;
-import com.github.upcraftlp.digitalstorage.blockentity.container.DriveBayContainer;
+import com.github.upcraftlp.digitalstorage.menu.container.DriveBayContainer;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.ingame.ContainerScreen;
 import net.minecraft.entity.player.PlayerInventory;

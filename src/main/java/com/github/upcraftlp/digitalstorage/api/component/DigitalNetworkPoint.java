@@ -6,6 +6,7 @@ import nerdhub.cardinal.components.api.ComponentType;
 import nerdhub.cardinal.components.api.component.extension.SyncedComponent;
 import nerdhub.cardinal.components.api.component.extension.TypeAwareComponent;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 
 import java.util.Collection;
 import java.util.Set;
@@ -20,6 +21,10 @@ public interface DigitalNetworkPoint extends SyncedComponent, TypeAwareComponent
 
     //FIXME remove in favor of proper api
     Collection<ItemStackWrapper> getContentsTemp();
+
+    BlockPos getPosition();
+
+    World getWorld();
 
     @Override
     default ComponentType<?> getComponentType() {

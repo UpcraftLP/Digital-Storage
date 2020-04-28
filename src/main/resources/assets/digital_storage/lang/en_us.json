@@ -20,5 +20,10 @@
     "format.digital_storage.quadrillion": "%sq",
     "format.digital_storage.ten_quadrillion": "%sq",
     "format.digital_storage.quintillion": "%sQ",
-    "format.digital_storage.max": "MAX"
+    "format.digital_storage.max": "MAX",
+    "command.digital_storage.clear_networks.success.all": "Reset %s networks in all dimensions",
+    "command.digital_storage.clear_networks.success.single": "Reset %s networks in dimension '%s'",
+    "minecraft:the_nether": "The Nether",
+    "minecraft:overworld": "Overworld",
+    "minecraft:the_end": "The End"
 }

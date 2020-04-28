@@ -1,4 +1,4 @@
-package com.github.upcraftlp.digitalstorage.blockentity.container;
+package com.github.upcraftlp.digitalstorage.menu.container;
 
 import com.github.upcraftlp.digitalstorage.blockentity.DriveBayBlockEntity;
 import com.github.upcraftlp.digitalstorage.util.DSTags;
