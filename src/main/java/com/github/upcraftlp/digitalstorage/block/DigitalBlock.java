@@ -9,7 +9,7 @@ import net.minecraft.item.Item;
 
 import javax.annotation.Nullable;
 
-import static com.github.upcraftlp.digitalstorage.util.DSUtils.*;
+import static com.github.upcraftlp.digitalstorage.util.DSUtils.makeItem;
 
 public class DigitalBlock extends Block implements ItemBlockProvider {
 

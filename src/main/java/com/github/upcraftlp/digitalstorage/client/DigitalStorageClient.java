@@ -1,8 +1,8 @@
 package com.github.upcraftlp.digitalstorage.client;
 
 import com.github.glasspane.mesh.api.annotation.CalledByReflection;
-import com.github.upcraftlp.digitalstorage.network.packet.DSPacketHandler;
 import com.github.upcraftlp.digitalstorage.menu.DSMenus;
+import com.github.upcraftlp.digitalstorage.network.packet.DSPacketHandler;
 import net.fabricmc.api.ClientModInitializer;
 
 @CalledByReflection
