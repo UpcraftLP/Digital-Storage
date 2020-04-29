@@ -36,8 +36,8 @@ public class NetworkConnectionRenderer {
                         connections.forEach(connection -> {
                             Vector3f start = new Vector3f(connection.getPos1().getX() + 0.5F, connection.getPos1().getY() + 0.5F, connection.getPos1().getZ() + 0.5F);
                             Vector3f end = new Vector3f(connection.getPos2().getX() + 0.5F, connection.getPos2().getY() + 0.5F, connection.getPos2().getZ() + 0.5F);
-                            buffer.vertex(modelMatrix, start.getX(), start.getY(), start.getZ()).color(1.0F, 1.0F, 1.0F, 1.0F);
-                            buffer.vertex(modelMatrix, end.getX(), end.getY(), end.getZ()).color(1.0F, 1.0F, 1.0F, 1.0F);
+                            buffer.vertex(modelMatrix, start.getX(), start.getY(), start.getZ()).color(1.0F, 1.0F, 1.0F, 1.0F).next();
+                            buffer.vertex(modelMatrix, end.getX(), end.getY(), end.getZ()).color(1.0F, 1.0F, 1.0F, 1.0F).next();
                         });
                         profiler.pop();
                     });
