@@ -3,3 +3,7 @@ accessWidener v1 named
 
 accessible class net/minecraft/client/render/WorldRenderer$ChunkInfo
 accessible field net/minecraft/client/render/WorldRenderer$ChunkInfo chunk Lnet/minecraft/client/render/chunk/ChunkBuilder$BuiltChunk;
+
+accessible field net/minecraft/server/world/ThreadedAnvilChunkStorage currentChunkHolders Lit/unimi/dsi/fastutil/longs/Long2ObjectLinkedOpenHashMap;
+accessible field net/minecraft/server/world/ThreadedAnvilChunkStorage watchDistance I
+accessible method net/minecraft/server/world/ThreadedAnvilChunkStorage getChebyshevDistance (Lnet/minecraft/util/math/ChunkPos;Lnet/minecraft/server/network/ServerPlayerEntity;Z)I

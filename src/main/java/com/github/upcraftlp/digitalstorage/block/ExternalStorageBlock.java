@@ -70,24 +70,28 @@ public class ExternalStorageBlock extends DigitalBlock implements BlockComponent
         return hasComponent(blockView, blockPos, componentType, direction) ? (T) new DigitalNetworkPoint() {
             @Override
             public void fromTag(CompoundTag tag) {
-
+                //NO-OP
             }
 
             @Override
             public CompoundTag toTag(CompoundTag tag) {
+                //NO-OP
                 return tag;
             }
 
             @Override
             public void sync() {
+                //NO-OP
             }
 
             @Override
             public void syncWith(ServerPlayerEntity player) {
+                //NO-OP
             }
 
             @Override
             public void processPacket(PacketContext ctx, PacketByteBuf buf) {
+                //NO-OP
             }
 
             @Override

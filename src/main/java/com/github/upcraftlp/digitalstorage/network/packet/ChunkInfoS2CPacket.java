@@ -35,22 +35,26 @@ public class ChunkInfoS2CPacket {
         Map<UUID, List<PersistentNetworkData.Connection>> networkConnections = PersistentNetworkData.get(world).getConnectionsForChunk(chunk.getPos());
         if(forceSync || !networkConnections.isEmpty()) {
             PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
-            buf.writeLong(chunk.getPos().toLong());
-            buf.writeVarInt(networkConnections.size());
-            networkConnections.forEach((uuid, connectionList) -> {
-                buf.writeUuid(uuid);
-                buf.writeVarInt(connectionList.size());
-                connectionList.forEach(connection -> {
-                    buf.writeBlockPos(connection.getPos1());
-                    buf.writeBlockPos(connection.getPos2());
-                });
-            });
+            writeChunkData(networkConnections, chunk.getPos(), buf);
             ServerSidePacketRegistry.INSTANCE.sendToPlayer(target, ID, buf);
         }
     }
 
+    static void writeChunkData(Map<UUID, List<PersistentNetworkData.Connection>> networkConnections, ChunkPos chunkPos, PacketByteBuf buf) {
+        buf.writeLong(chunkPos.toLong());
+        buf.writeVarInt(networkConnections.size());
+        networkConnections.forEach((uuid, connectionList) -> {
+            buf.writeUuid(uuid);
+            buf.writeVarInt(connectionList.size());
+            connectionList.forEach(connection -> {
+                buf.writeBlockPos(connection.getPos1());
+                buf.writeBlockPos(connection.getPos2());
+            });
+        });
+    }
+
     @Environment(EnvType.CLIENT)
-    static void onPacket(PacketContext ctx, PacketByteBuf byteBuf) {
+    static void readChunkData(PacketContext ctx, PacketByteBuf byteBuf) {
         ChunkPos pos = new ChunkPos(byteBuf.readLong());
         int mapSize = byteBuf.readVarInt();
         Map<UUID, List<PersistentNetworkData.Connection>> connections = new HashMap<>(mapSize, 1.0F);
@@ -67,5 +71,10 @@ public class ChunkInfoS2CPacket {
             connections.put(networkID, connectionList);
         }
         ctx.getTaskQueue().execute(() -> ClientNetworkInfo.updateConnections(pos, connections));
+    }
+
+    @Environment(EnvType.CLIENT)
+    static void onPacket(PacketContext ctx, PacketByteBuf byteBuf) {
+        readChunkData(ctx, byteBuf);
     }
 }
