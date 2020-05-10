@@ -26,12 +26,12 @@ public enum DsFormatter {
     private final boolean decimal;
 
     DsFormatter(String name, long minValue, boolean decimal) {
-        this.translationKey = Util.createTranslationKey("format", new Identifier(DigitalStorage.MODID, name));
+        this.translationKey = Util.createTranslationKey("format", new Identifier(DigitalStorage.NAMESPACE, name));
         this.value = minValue;
         this.decimal = decimal;
     }
 
-    private static final String MAX = Util.createTranslationKey("format", new Identifier(DigitalStorage.MODID, "max"));
+    private static final String MAX = Util.createTranslationKey("format", new Identifier(DigitalStorage.NAMESPACE, "max"));
 
     public static String format(long value) {
         if(value < 0 || value == Long.MAX_VALUE) {

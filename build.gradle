@@ -2,6 +2,7 @@ plugins {
     id "java-library"
     id "maven-publish"
     id "fabric-loom" version "0.2.7-SNAPSHOT"
+    id "com.wynprice.cursemaven" version "2.1.1"
 }
 
 sourceCompatibility = JavaVersion.VERSION_1_8
@@ -37,8 +38,10 @@ repositories {
 
 dependencies {
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
-    compileOnly "com.google.code.findbugs:jsr305:3.0.2"
     //needed to get nullability checks for MC source, otherwise using jetbrains annotations
+    compileOnly "com.google.code.findbugs:jsr305:3.0.2"
+
+
     mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
@@ -56,7 +59,7 @@ dependencies {
         exclude(group: "io.github.prospector", module: "modmenu")
     }
 
-    modApi "com.github.OnyxStudios.Cardinal-Components-API:Cardinal-Components-API:${project.cca_version}"
+    modApi "io.github.OnyxStudios.Cardinal-Components-API:Cardinal-Components-API:${project.cca_version}"
     modImplementation("com.github.GlassPane:Mesh:${project.mesh_version}") {
         exclude(group: "net.fabricmc")
         exclude(group: "net.fabricmc.fabric-api")
@@ -66,7 +69,7 @@ dependencies {
     //only for testing
     modRuntime "io.github.prospector:modmenu:${project.modmenu_version}"
     modRuntime("me.shedaniel:RoughlyEnoughItems:${project.rei_version}")
-    modRuntime("mcp.mobius.waila:Hwyla:${project.hwyla_version}") {
+    modRuntime("curse.maven:hwyla:${project.hwyla_version}") {
         transitive = false
     }
     modRuntime("TechReborn:TechReborn-1.15:${project.techreborn_version}") {

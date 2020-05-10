@@ -10,10 +10,10 @@ public class DSCommands {
 
     public static void init() {
         CommandRegistry.INSTANCE.register(false, serverCommandSourceCommandDispatcher -> {
-            LiteralArgumentBuilder<ServerCommandSource> builder = CommandManager.literal(DigitalStorage.MODID);
+            LiteralArgumentBuilder<ServerCommandSource> builder = CommandManager.literal(DigitalStorage.NAMESPACE);
             ClearNetworkDataCommand.register(builder);
             serverCommandSourceCommandDispatcher.register(builder);
-            serverCommandSourceCommandDispatcher.register(CommandManager.literal("ds").redirect(serverCommandSourceCommandDispatcher.getRoot().getChild(DigitalStorage.MODID)));
+            serverCommandSourceCommandDispatcher.register(CommandManager.literal("ds").redirect(serverCommandSourceCommandDispatcher.getRoot().getChild(DigitalStorage.NAMESPACE)));
         });
     }
 }

@@ -10,7 +10,7 @@ import net.minecraft.util.Identifier;
 
 public class DriveBayScreen extends ContainerScreen<DriveBayContainer> {
 
-    private static final Identifier TEXTURE = new Identifier(DigitalStorage.MODID, "textures/gui/container/drive_bay.png");
+    private static final Identifier TEXTURE = new Identifier(DigitalStorage.NAMESPACE, "textures/gui/container/drive_bay.png");
 
     public DriveBayScreen(DriveBayContainer container, PlayerInventory playerInventory, Text name) {
         super(container, playerInventory, name);

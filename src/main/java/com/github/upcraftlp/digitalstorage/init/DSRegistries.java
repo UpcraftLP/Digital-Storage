@@ -8,7 +8,7 @@ import com.github.upcraftlp.digitalstorage.api.network.devices.DeviceType;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.SimpleRegistry;
 
-@AutoRegistry(value = Registry.class, modid = DigitalStorage.MODID, registry = "registries")
+@AutoRegistry(value = Registry.class, modid = DigitalStorage.NAMESPACE, registry = "registries")
 public class DSRegistries implements AutoRegistryHook {
 
     public static final Registry<DeviceType> DEVICE_TYPE = new SimpleRegistry<>();

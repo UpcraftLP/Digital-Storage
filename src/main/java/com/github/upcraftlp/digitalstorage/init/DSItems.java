@@ -8,7 +8,7 @@ import net.minecraft.item.Item;
 
 import static com.github.upcraftlp.digitalstorage.util.DSUtils.*;
 
-@AutoRegistry(value = Item.class, modid = DigitalStorage.MODID, registry = "item")
+@AutoRegistry(value = Item.class, modid = DigitalStorage.NAMESPACE, registry = "item")
 public class DSItems implements AutoRegistryHook {
 
     //SSDs

@@ -27,11 +27,11 @@ import java.util.stream.Collectors;
 @CalledByReflection
 public class DigitalStorage implements ModInitializer {
 
-    public static final String MODID = "digital_storage";
+    public static final String NAMESPACE = "digital_storage";
 
-    public static final ItemGroup DS_ITEMS = FabricItemGroupBuilder.build(new Identifier(MODID, "items"), () -> new ItemStack(Items.CHEST));
-    public static final ItemGroup DS_DRIVES = FabricItemGroupBuilder.build(new Identifier(MODID, "storage"), () -> new ItemStack(Items.MUSIC_DISC_WAIT));
-    private static final Logger logger = MeshLoggerFactory.createPrefixLogger(MODID, "Digital Storage");
+    public static final ItemGroup DS_ITEMS = FabricItemGroupBuilder.build(new Identifier(NAMESPACE, "items"), () -> new ItemStack(Items.CHEST));
+    public static final ItemGroup DS_DRIVES = FabricItemGroupBuilder.build(new Identifier(NAMESPACE, "storage"), () -> new ItemStack(Items.MUSIC_DISC_WAIT));
+    private static final Logger logger = MeshLoggerFactory.createPrefixLogger(NAMESPACE, "Digital Storage");
 
     public static Logger getLogger() {
         return logger;

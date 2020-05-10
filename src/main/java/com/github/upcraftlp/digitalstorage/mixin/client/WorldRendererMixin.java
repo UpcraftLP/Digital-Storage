@@ -44,7 +44,7 @@ public abstract class WorldRendererMixin {
     private void ds_onRenderWorld(MatrixStack matrixStack, float tickDelta, long limitTime, boolean renderBlockOutline, Camera camera, GameRenderer gameRenderer, LightmapTextureManager lightmapTextureManager, Matrix4f modelMatrix, CallbackInfo ci) {
         Profiler profiler = world.getProfiler();
         Vec3d cameraPos = camera.getPos();
-        profiler.swap(DigitalStorage.MODID + ":networks");
+        profiler.swap(DigitalStorage.NAMESPACE + ":networks");
         NetworkConnectionRenderer.render(matrixStack, profiler, tickDelta, this.bufferBuilders.getEntityVertexConsumers(), cameraPos, this.visibleChunks);
     }
 }

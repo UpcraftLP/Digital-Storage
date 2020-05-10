@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 public class DSComponents {
 
-    public static final ComponentType<DigitalNetworkPoint> NETWORK_COMPONENT = ComponentRegistry.INSTANCE.registerIfAbsent(new Identifier(DigitalStorage.MODID, "network_point"), DigitalNetworkPoint.class);
+    public static final ComponentType<DigitalNetworkPoint> NETWORK_COMPONENT = ComponentRegistry.INSTANCE.registerIfAbsent(new Identifier(DigitalStorage.NAMESPACE, "network_point"), DigitalNetworkPoint.class);
 
     public static void init() {
         String fields = Arrays.stream(DSComponents.class.getFields()).map(Field::getName).map(s -> s.toLowerCase(Locale.ROOT)).sorted().collect(Collectors.joining("\n"));

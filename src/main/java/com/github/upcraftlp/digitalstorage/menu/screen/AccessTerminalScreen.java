@@ -17,7 +17,7 @@ import java.util.List;
 
 public class AccessTerminalScreen extends ContainerScreen<AccessTerminalContainer> {
 
-    private static final Identifier TEXTURE = new Identifier(DigitalStorage.MODID, "textures/gui/container/access_terminal.png");
+    private static final Identifier TEXTURE = new Identifier(DigitalStorage.NAMESPACE, "textures/gui/container/access_terminal.png");
 
     public AccessTerminalScreen(AccessTerminalContainer container, PlayerInventory playerInventory, Text name) {
         super(container, playerInventory, name);

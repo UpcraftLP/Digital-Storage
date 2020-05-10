@@ -42,7 +42,7 @@ public class LinkingItem extends Item {
             BlockComponentProvider.get(state).optionally(world, pos, DSComponents.NETWORK_COMPONENT, context.getSide())
                     .ifPresent(networkPoint -> {
                         ItemStack stack = context.getStack();
-                        CompoundTag tag = stack.getOrCreateSubTag(DigitalStorage.MODID);
+                        CompoundTag tag = stack.getOrCreateSubTag(DigitalStorage.NAMESPACE);
                         if(tag.contains(KEY_LINK_POS, NbtType.COMPOUND) && tag.contains("Side", NbtType.STRING)) {
                             BlockPos link = NbtHelper.toBlockPos(tag.getCompound(KEY_LINK_POS));
                             Direction targetSide = Direction.byName(tag.getString("Side"));
@@ -70,7 +70,7 @@ public class LinkingItem extends Item {
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
         super.appendTooltip(stack, world, tooltip, context);
-        CompoundTag tag = stack.getSubTag(DigitalStorage.MODID);
+        CompoundTag tag = stack.getSubTag(DigitalStorage.NAMESPACE);
         if(tag != null && tag.contains(KEY_LINK_POS, NbtType.COMPOUND)) {
             BlockPos pos = NbtHelper.toBlockPos(tag.getCompound(KEY_LINK_POS));
             tooltip.add(new LiteralText("Linking to: " + pos));

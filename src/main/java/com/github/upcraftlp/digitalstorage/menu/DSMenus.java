@@ -19,8 +19,8 @@ import org.jetbrains.annotations.NotNull;
 
 public class DSMenus {
 
-    public static final Identifier ACCESS_TERMINAL = new Identifier(DigitalStorage.MODID, "access_terminal");
-    public static final Identifier DRIVE_BAY = new Identifier(DigitalStorage.MODID, "drive_bay");
+    public static final Identifier ACCESS_TERMINAL = new Identifier(DigitalStorage.NAMESPACE, "access_terminal");
+    public static final Identifier DRIVE_BAY = new Identifier(DigitalStorage.NAMESPACE, "drive_bay");
 
     public static void registerContainers() {
         ContainerProviderRegistry.INSTANCE.registerFactory(ACCESS_TERMINAL, AccessTerminalContainer::new);
